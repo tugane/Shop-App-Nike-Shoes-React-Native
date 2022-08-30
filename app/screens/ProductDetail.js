@@ -1,5 +1,12 @@
-import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
+import {
+  SafeAreaView,
+  Dimensions,
+  Text,
+  TouchableOpacity,
+  View,
+  ScrollView,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Animated, {
   runOnJS,
@@ -33,6 +40,9 @@ const product = {
     require("../assets/chz-grey.png"),
   ],
 };
+
+const { height } = Dimensions.get("window");
+const BG_HEIGHT = height / 1.7;
 
 const ProductDetail = () => {
   const [activeSize, setActiveSize] = useState(0);
@@ -148,200 +158,117 @@ const ProductDetail = () => {
     );
   };
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: product.colors[activeColor].background,
-      }}
-    >
-      <SafeAreaView>
-        <View style={{ padding: 10 }}>
-          <View style={{ position: "relative", height: 450 }}>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                position: "absolute",
-                width: "100%",
-                zIndex: 5,
-              }}
-            >
-              <TouchableOpacity
+    <>
+      <ScrollView
+        style={{
+          flex: 1,
+          backgroundColor: product.colors[activeColor].background,
+        }}
+      >
+        <SafeAreaView>
+          <View style={{ padding: 10 }}>
+            <View style={{ position: "relative", height: 420 }}>
+              <View
                 style={{
-                  backgroundColor: "white",
-                  borderRadius: 10,
-                  width: 38,
-                  height: 40,
-                  justifyContent: "center",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
                   alignItems: "center",
-                }}
-              >
-                <Ionicons
-                  name="chevron-back"
-                  color={`rgb(30,30,30)`}
-                  size={30}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  borderRadius: 10,
-                  width: 38,
-                  height: 40,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Ionicons name="heart-outline" color="white" size={35} />
-              </TouchableOpacity>
-            </View>
-            <Animated.View
-              style={[
-                {
-                  width: 600,
-                  height: 550,
-                  backgroundColor: product.colors[activeColor].fill,
-                  borderRadius: 400,
                   position: "absolute",
-                },
-                circleRStyle,
-              ]}
-            />
-            <View
-              style={{
-                position: "absolute",
-                height: "100%",
-                width: "100%",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Animated.Text
-                style={[
-                  {
-                    color: "white",
-                    fontSize: 90,
-                    textTransform: "uppercase",
-                    fontWeight: "700",
-                  },
-                  categoryRStyle,
-                ]}
+                  width: "100%",
+                  zIndex: 5,
+                }}
               >
-                {product.model}
-              </Animated.Text>
-            </View>
-            <View
-              style={{
-                position: "absolute",
-                height: "100%",
-                width: "100%",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Animated.Image
-                source={product.images[activeColor]}
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: "white",
+                    borderRadius: 10,
+                    width: 38,
+                    height: 40,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Ionicons
+                    name="chevron-back"
+                    color={`rgb(30,30,30)`}
+                    size={30}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    borderRadius: 10,
+                    width: 38,
+                    height: 40,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Ionicons name="heart-outline" color="white" size={35} />
+                </TouchableOpacity>
+              </View>
+              <Animated.View
                 style={[
                   {
-                    width: "100%",
-
-                    shadowOffset: { width: 1, height: 10 },
-                    shadowColor: "black",
-                    shadowRadius: 15,
-                    shadowOpacity: 0.7,
+                    width: 600,
+                    height: 550,
+                    backgroundColor: product.colors[activeColor].fill,
+                    borderRadius: 400,
+                    position: "absolute",
                   },
-                  imgRStyle,
+                  circleRStyle,
                 ]}
-                resizeMode="contain"
               />
+              <View
+                style={{
+                  position: "absolute",
+                  height: "100%",
+                  width: "100%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Animated.Text
+                  style={[
+                    {
+                      color: "white",
+                      fontSize: 90,
+                      textTransform: "uppercase",
+                      fontWeight: "700",
+                    },
+                    categoryRStyle,
+                  ]}
+                >
+                  {product.model}
+                </Animated.Text>
+              </View>
+              <View
+                style={{
+                  position: "absolute",
+                  height: "100%",
+                  width: "100%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Animated.Image
+                  source={product.images[activeColor]}
+                  style={[
+                    {
+                      width: "100%",
+
+                      shadowOffset: { width: 1, height: 10 },
+                      shadowColor: "black",
+                      shadowRadius: 15,
+                      shadowOpacity: 0.7,
+                    },
+                    imgRStyle,
+                  ]}
+                  resizeMode="contain"
+                />
+              </View>
             </View>
           </View>
-        </View>
-        <View style={{ padding: 10 }}>
-          <Text
-            style={{
-              color: "white",
-              fontSize: 15,
-              textTransform: "uppercase",
-              fontWeight: "700",
-            }}
-          >
-            {product.model}
-          </Text>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginVertical: 5,
-              alignItems: "center",
-            }}
-          >
-            <Text
-              style={{
-                color: "white",
-                fontSize: 20,
-                textTransform: "uppercase",
-                fontWeight: "800",
-                width: "70%",
-              }}
-              numberOfLines={1}
-            >
-              {product.name}
-            </Text>
-            <Text
-              style={{
-                color: "white",
-                fontSize: 20,
-                textTransform: "uppercase",
-                fontWeight: "800",
-              }}
-            >
-              ${product.price}
-            </Text>
-          </View>
-          <View style={{ flexDirection: "row", marginVertical: 5 }}>
-            <View>
-              <Ionicons
-                name="star"
-                style={{ marginRight: 5 }}
-                size={15}
-                color={product.colors[activeColor].fill}
-              />
-            </View>
-            <View>
-              <Ionicons
-                name="star"
-                style={{ marginRight: 5 }}
-                size={15}
-                color={product.colors[activeColor].fill}
-              />
-            </View>
-            <View>
-              <Ionicons
-                name="star"
-                style={{ marginRight: 5 }}
-                size={15}
-                color={product.colors[activeColor].fill}
-              />
-            </View>
-            <View>
-              <Ionicons
-                name="star"
-                style={{ marginRight: 5 }}
-                size={15}
-                color="white"
-              />
-            </View>
-            <View>
-              <Ionicons
-                name="star"
-                style={{ marginRight: 5 }}
-                size={15}
-                color="white"
-              />
-            </View>
-          </View>
-          <View style={{ marginVertical: 20 }}>
+          <View style={{ padding: 10 }}>
             <Text
               style={{
                 color: "white",
@@ -350,59 +277,82 @@ const ProductDetail = () => {
                 fontWeight: "700",
               }}
             >
-              size
+              {product.model}
             </Text>
             <View
               style={{
                 flexDirection: "row",
-                alignContent: "center",
-                marginTop: 15,
+                justifyContent: "space-between",
+                marginVertical: 5,
+                alignItems: "center",
               }}
             >
-              {product.size.map((size, index) => (
-                <View key={index}>
-                  <TouchableOpacity
-                    onPress={() => handleSize(size, index)}
-                    style={{
-                      marginRight: 20,
-                      backgroundColor:
-                        activeSize === index
-                          ? product.colors[activeColor].fill
-                          : `rgb(256,256,256)`,
-                      width: 38,
-                      height: 40,
-                      justifyContent: "center",
-                      alignItems: "center",
-                      borderRadius: 5,
-                    }}
-                  >
-                    <Text
-                      style={{
-                        color:
-                          activeSize === index
-                            ? product.colors[activeColor].text
-                            : "black",
-                        fontSize: 18,
-                        textTransform: "uppercase",
-                        fontWeight: "800",
-                      }}
-                    >
-                      {size}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              ))}
+              <Text
+                style={{
+                  color: "white",
+                  fontSize: 20,
+                  textTransform: "uppercase",
+                  fontWeight: "800",
+                  width: "70%",
+                }}
+                numberOfLines={1}
+              >
+                {product.name}
+              </Text>
+              <Text
+                style={{
+                  color: "white",
+                  fontSize: 20,
+                  textTransform: "uppercase",
+                  fontWeight: "800",
+                }}
+              >
+                ${product.price}
+              </Text>
             </View>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginVertical: 20,
-            }}
-          >
-            <View>
+            <View style={{ flexDirection: "row", marginVertical: 5 }}>
+              <View>
+                <Ionicons
+                  name="star"
+                  style={{ marginRight: 5 }}
+                  size={15}
+                  color={product.colors[activeColor].fill}
+                />
+              </View>
+              <View>
+                <Ionicons
+                  name="star"
+                  style={{ marginRight: 5 }}
+                  size={15}
+                  color={product.colors[activeColor].fill}
+                />
+              </View>
+              <View>
+                <Ionicons
+                  name="star"
+                  style={{ marginRight: 5 }}
+                  size={15}
+                  color={product.colors[activeColor].fill}
+                />
+              </View>
+              <View>
+                <Ionicons
+                  name="star"
+                  style={{ marginRight: 5 }}
+                  size={15}
+                  color="white"
+                />
+              </View>
+              <View>
+                <Ionicons
+                  name="star"
+                  style={{ marginRight: 5 }}
+                  size={15}
+                  color="white"
+                />
+              </View>
+            </View>
+            <View style={{ marginVertical: 10 }}>
               <Text
                 style={{
                   color: "white",
@@ -411,66 +361,127 @@ const ProductDetail = () => {
                   fontWeight: "700",
                 }}
               >
-                Color
+                size
               </Text>
               <View
                 style={{
                   flexDirection: "row",
                   alignContent: "center",
                   marginTop: 15,
-                  position: "relative",
                 }}
               >
-                {product.colors.map((color, index) => (
-                  <Animated.View key={index}>
+                {product.size.map((size, index) => (
+                  <View key={index}>
                     <TouchableOpacity
-                      onPress={() => handleColor(index)}
-                      style={[
-                        {
-                          marginRight: 10,
-                          backgroundColor: color.fill,
-                          width: 25,
-                          height: 25,
-                          justifyContent: "center",
-                          alignItems: "center",
-                          borderRadius: 20,
-                        },
-                        activeColor === index && {
-                          borderColor: `rgb(256,256,256)`,
-                          borderWidth: 5,
-                        },
-                      ]}
-                    />
-                  </Animated.View>
+                      onPress={() => handleSize(size, index)}
+                      style={{
+                        marginRight: 20,
+                        backgroundColor:
+                          activeSize === index
+                            ? product.colors[activeColor].fill
+                            : `rgb(256,256,256)`,
+                        width: 38,
+                        height: 40,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: 5,
+                      }}
+                    >
+                      <Text
+                        style={{
+                          color:
+                            activeSize === index
+                              ? product.colors[activeColor].text
+                              : "black",
+                          fontSize: 18,
+                          textTransform: "uppercase",
+                          fontWeight: "800",
+                        }}
+                      >
+                        {size}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
                 ))}
               </View>
             </View>
-            <TouchableOpacity
+            <View
               style={{
-                padding: 10,
-                backgroundColor: product.colors[activeColor].fill,
-                width: 150,
-                borderRadius: 20,
-                height: 70,
-                justifyContent: "center",
+                flexDirection: "row",
+                justifyContent: "space-between",
                 alignItems: "center",
               }}
             >
-              <Text
+              <View>
+                <Text
+                  style={{
+                    color: "white",
+                    fontSize: 15,
+                    textTransform: "uppercase",
+                    fontWeight: "700",
+                  }}
+                >
+                  Color
+                </Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignContent: "center",
+                    marginTop: 15,
+                    position: "relative",
+                  }}
+                >
+                  {product.colors.map((color, index) => (
+                    <Animated.View key={index}>
+                      <TouchableOpacity
+                        onPress={() => handleColor(index)}
+                        style={[
+                          {
+                            marginRight: 10,
+                            backgroundColor: color.fill,
+                            width: 25,
+                            height: 25,
+                            justifyContent: "center",
+                            alignItems: "center",
+                            borderRadius: 20,
+                          },
+                          activeColor === index && {
+                            borderColor: `rgb(256,256,256)`,
+                            borderWidth: 5,
+                          },
+                        ]}
+                      />
+                    </Animated.View>
+                  ))}
+                </View>
+              </View>
+              <TouchableOpacity
                 style={{
-                  color: product.colors[activeColor].text,
-                  fontSize: 20,
-                  textTransform: "uppercase",
-                  fontWeight: "800",
+                  padding: 10,
+                  backgroundColor: product.colors[activeColor].fill,
+                  width: 150,
+                  borderRadius: 20,
+                  height: 70,
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
               >
-                Buy
-              </Text>
-            </TouchableOpacity>
+                <Text
+                  style={{
+                    color: product.colors[activeColor].text,
+                    fontSize: 20,
+                    textTransform: "uppercase",
+                    fontWeight: "800",
+                  }}
+                >
+                  Buy
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </SafeAreaView>
-    </View>
+        </SafeAreaView>
+      </ScrollView>
+    </>
   );
 };
 
