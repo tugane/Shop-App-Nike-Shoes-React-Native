@@ -4,7 +4,7 @@ Amazing shop app ui using react native - nike shoes - product details screen
 
 ## Step1
 
-install dev dependences
+install dev dependencies
 
 ### `npm install`
 
